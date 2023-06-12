@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example">
+  <ul class="inline-flex -space-x-px">
+    <li>
+      <a [routerLink]="[url]" [queryParams]="{ page: currentPage -1 }" [ngClass]="{ disabled: currentPage == 1 }" class="px-3 py-2 ml-0 bg-primary leading-tight  border border-gray-300 rounded-l-lg hover:text-primary hover:bg-gray-100">Previous</a>
+    </li>
+    <ng-container *ngFor="let page of pages">
+    <li>
+      <a [ngClass]="{ active: currentPage == page }" [routerLink]="[url]" [queryParams]="{ page: page }" class="px-3 py-2 leading-tight bg-primary border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">{{ page }}</a>
+    </li>
+    </ng-container>
+    <li>
+      <a [routerLink]="[url]" [queryParams]="{ page: currentPage +1 }" [ngClass]="{ disabled: currentPage == 10 }" class="px-3 py-2 leading-tight bg-primary border border-gray-300 rounded-r-lg hover:text-primary hover:bg-gray-100">Next</a>
+    </li>
+  </ul>
+</nav>

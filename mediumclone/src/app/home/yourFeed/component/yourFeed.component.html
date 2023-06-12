@@ -1,0 +1,6 @@
+<app-banner></app-banner>
+<div class="grid grid-cols-12 mx-5">
+  <app-feed-toggler class="col-span-12 order-1 md:order-1 mx-auto border-b-4 border-primary"></app-feed-toggler>
+    <app-feed class="col-span-12 md:col-span-9 order-3 md:order-2 mx-2" [apiUrl]="apiUrl"></app-feed>
+    <app-popular-tags class="md:my-10 col-span-12 md:col-span-3 order-2 md:order-3 mx-2"></app-popular-tags>
+</div>

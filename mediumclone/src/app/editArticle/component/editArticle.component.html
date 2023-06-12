@@ -1,0 +1,15 @@
+<p>edit work</p>
+<p>new article</p>
+<ng-container *ngIf="data$ | async as data">
+  <!-- LOADER -->
+  <ng-container *ngIf="data.initialValues">
+  <app-article-form
+    [isSubmitting]="data.isSubmitting"
+    [errors]="data.backendErrors"
+    [initialValues]="data.initialValues"
+    (articleSubmit)="onSubmit($event)"
+  ></app-article-form>
+</ng-container>
+</ng-container>
+
+

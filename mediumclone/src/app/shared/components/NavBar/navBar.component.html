@@ -1,0 +1,65 @@
+<nav class="navBar fixed shadow-lg shadow-primary">
+  <div
+    class="max-w-full flex flex-wrap items-center justify-between mx-auto py-4 px-10 xl:px-20"
+  >
+    <a [routerLink]="['/']" class="flex items-center">
+      <img
+        src="https://flowbite.com/docs/images/logo.svg"
+        class="h-8 mr-3"
+        alt="Flowbite Logo"
+      />
+      <span
+        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+        >Fabrizio Alessi</span
+      >
+    </a>
+
+    <button
+      data-collapse-toggle="navbar-default"
+      class="md:hidden"
+      onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
+      aria-label="Main Menu"
+    >
+      <svg width="70" height="70" viewBox="0 0 100 100">
+        <path
+          class="line line1"
+          d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+        />
+        <path class="line line2" d="M 20,50 H 80" />
+        <path
+          class="line line3"
+          d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+        />
+      </svg>
+    </button>
+
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0"
+      >
+        <li class="mt-1 navLink rounded-lg">
+          <a [routerLink]="['/']" class="block py-2 pl-3 pr-4 md:p-0 links">home</a>
+        </li>
+        <ng-container *ngIf="isLoggedin$ | async; else logIn">
+        <li class="mt-1 navLink rounded-lg">
+          <a [routerLink]="['/articles/new']" class="block py-2 pl-3 pr-4 md:p-0 links">Nuovo articolo</a>
+        </li>
+        <li class="mt-1 navLink rounded-lg">
+          <a [routerLink]="['/auth/settings']" class="block py-2 pl-3 pr-4 md:p-0 links">impostazioni</a>
+        </li>
+        <li class="mt-1 flex navLink rounded-lg">
+          <img [src]="currentUser$ | async" class="user-pic rounded-full" />
+          <a href="#" class="nav-link">{{
+            (currentUser$ | async)!.user!.username
+          }}</a>
+        </li>
+      </ng-container>
+      <ng-template #logIn>
+        <li class="mt-1 navLink rounded-lg">
+          <a [routerLink]="['/auth/login']" class="block py-2 pl-3 pr-4 md:p-0 links">Sign in</a>
+        </li>
+      </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

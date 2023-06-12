@@ -1,0 +1,7 @@
+<ul class="flex flex-row">
+  <ng-container *ngFor="let tag of tags">
+  <li class="tag p-1 rounded-lg mx-1 my-1">
+    <a class="text-black" [routerLink]="['/tags', tag]">{{tag}}</a>
+  </li>
+</ng-container>
+</ul>

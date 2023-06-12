@@ -1,0 +1,237 @@
+<!-- <div *ngIf="isLoading$ | async" class="grid grid-cols-1">
+  <div class="mx-auto my-20">
+    <app-spinner></app-spinner>
+  </div>
+</div> -->
+<app-error-message
+  *ngIf="feedError$ | async"
+  [errorMessage]="(feedError$ | async)!"
+></app-error-message>
+<div *ngIf="isLoading$ | async" class="grid grid-cols-1">
+  <div class="mx-auto my-20">
+    <app-spinner></app-spinner>
+  </div>
+</div>
+<div
+  class="my-11 feedContainer rounded-lg shadow-black shadow-lg"
+>
+  <div class="grid gap-2 mx-auto">
+    <ng-container *ngIf="feedContent$ | async as feedContent">
+      <ng-container *ngIf="feedContent.articlesCount == 0">
+        <div>
+          <h3 class="text-primary">Nessun articolo da mostrare</h3>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let article of (feedContent$ | async)!.articles">
+        <div
+          class="py-4 px-8 bg-white shadow-black shadow-lg rounded-lg my-10 mx-10 articleCard"
+        >
+          <div class="flex justify-center md:justify-end -mt-16">
+            <a [routerLink]="['/profiles', article.author.username]">
+              <img
+                class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
+                [src]="article.author.image"
+              />
+            </a>
+          </div>
+          <div>
+            <a [routerLink]="['/articles', article.slug]">
+              <h2
+                class="text-colorText hover:text-secondary text-3xl my-2 font-bolder"
+              >
+                {{ article.title }}
+              </h2>
+            </a>
+            <div class="flex">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 text-secondary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+            </svg>
+            </span>
+            <span class="date text-secondary"
+              >creato il: {{ article.createdAt }}</span
+            >
+          </div>
+            <p class="mt-5 text-colorText">{{ article.description }}</p>
+            <span
+              ><a
+                class="text-primary"
+                [routerLink]="['/articles', article.slug]"
+                >read more...</a
+              ></span
+            ><br />
+            <app-tag-list [tags]="article.tagList"></app-tag-list>
+          </div>
+          <div class="flex">
+            <app-add-to-favorite
+              [isFavorited]="article.favorited"
+              [articleSlug]="article.slug"
+              [favoriteCount]="article.favoritesCount"
+            >
+            </app-add-to-favorite>
+          </div>
+          <div class="author flex justify-end">
+            <a [routerLink]="['/profiles', article.author.username]">
+              <p class="hover:text-secondary">{{ article.author.username }}</p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<ng-container *ngIf="feedContent$ | async as feed">
+  <app-pagination
+    class="flex justify-center mx-auto"
+    [total]="feed!.articlesCount"
+    [limit]="limit"
+    [url]="baseUrl"
+    [currentPage]="currentPage"
+  ></app-pagination>
+</ng-container>
+<!-- MANSORY FEED -->
+<!-- <div
+    class="grid grid-cols-1 md:grid-cols-3 my-10 feedContainer rounded-lg shadow-black shadow-lg"
+  >
+    <div class="grid gap-2 mx-auto">
+      <ng-container
+        *ngFor="let article of filterFeed((feedContent$ | async)!.articles, 1)"
+      >
+        <div
+          class="max-w-md py-4 px-8 bg-white shadow-black shadow-lg rounded-lg my-7 articleCard"
+        >
+          <div class="flex justify-center md:justify-end -mt-16">
+            <img
+              class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
+              [src]="article.author.image"
+            />
+          </div>
+          <div>
+            <a [routerLink]="['/articles', article.slug]">
+              <h2
+                class="text-colorText hover:text-secondary text-3xl my-2 font-semibold"
+              >
+                {{ article.title }}
+              </h2>
+            </a>
+            <span class="date text-secondary"
+              >creato il: {{ article.createdAt }}</span
+            >
+            <p class="mt-2 text-colorText">{{ article.description }}</p>
+            <span
+              ><a
+                class="text-primary"
+                [routerLink]="['/articles', article.slug]"
+                >read more...</a
+              ></span
+            ><br />
+            <app-tag-list [tags]="article.tagList"></app-tag-list>
+          </div>
+          <div>
+            <app-add-to-favorite
+              [isFavorited]="article.favorited"
+              [articleSlug]="article.slug"
+              [favoriteCount]="article.favoritesCount"
+            >
+            </app-add-to-favorite>
+          </div>
+          <div class="flex justify-end mt-4">
+            <a [routerLink]="['/profiles', article.author.username]">
+              <p>{{ article.author.username }}</p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="grid gap-2 mx-auto">
+      <ng-container
+        *ngFor="let article of filterFeed((feedContent$ | async)!.articles, 2)"
+      >
+        <div
+          class="max-w-md py-4 px-8 shadow-black shadow-lg rounded-lg my-7 articleCard"
+        >
+          <div class="flex justify-center md:justify-end -mt-16">
+            <img
+              class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
+              [src]="article.author.image"
+            />
+          </div>
+          <div>
+            <a [routerLink]="['/articles', article.slug]">
+              <h2
+                class="my-2 text-colorText hover:text-secondary text-3xl font-semibold"
+              >
+                {{ article.title }}
+              </h2>
+            </a>
+            <span class="date text-secondary"
+              >creato il: {{ article.createdAt }}</span
+            >
+            <p class="mt-2 text-colorText">{{ article.description }}</p>
+            <span
+              ><a [routerLink]="['/articles', article.slug]"
+                >read more...</a
+              ></span
+            ><br />
+            <app-tag-list [tags]="article.tagList"></app-tag-list>
+          </div>
+          <div class="flex justify-end mt-4">
+            <a [routerLink]="['/profiles', article.author.username]">
+              <p>{{ article.author.username }}</p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="grid gap-2 mx-auto">
+      <ng-container
+        *ngFor="let article of filterFeed((feedContent$ | async)!.articles, 3)"
+      >
+        <div
+          class="max-w-md py-4 px-8 bg-white shadow-black shadow-lg rounded-lg my-7 articleCard"
+        >
+          <div class="flex justify-center md:justify-end -mt-16">
+            <img
+              class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
+              [src]="article.author.image"
+            />
+          </div>
+          <div>
+            <a [routerLink]="['/articles', article.slug]">
+              <h2
+                class="my-2 text-colorText hover:text-secondary text-3xl font-semibold"
+              >
+                {{ article.title }}
+              </h2>
+            </a>
+            <span class="date text-secondary"
+              >creato il: {{ article.createdAt }}</span
+            >
+            <p class="mt-2 text-colorText">{{ article.description }}</p>
+            <span
+              ><a [routerLink]="['/articles', article.slug]"
+                >read more...</a
+              ></span
+            ><br />
+            <app-tag-list [tags]="article.tagList"></app-tag-list>
+          </div>
+          <div class="flex justify-end mt-4">
+            <a [routerLink]="['/profiles', article.author.username]">
+              <p>{{ article.author.username }}</p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="feedContent$ | async as feed">
+  <app-pagination
+    class="flex justify-center mx-auto"
+    [total]="feed!.articlesCount"
+    [limit]="limit"
+    [url]="baseUrl"
+    [currentPage]="currentPage"
+  ></app-pagination>
+</ng-container> -->

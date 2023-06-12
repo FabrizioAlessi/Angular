@@ -1,0 +1,22 @@
+<ng-container *ngIf="data$ | async as data">
+  <!-- NOTA: Al click sul link cambia l'URL con il tag cliccato, il feedComponent è in ascolto del cambio di URL, QUINDI AGGIORNA IL FEED -->
+  <!-- <a *ngFor="let popularTag of data.popularTags" [routerLink]="['/tags', popularTag]">{{popularTag}}</a> -->
+  <div class="flex flex-col">
+    <h2 class="mx-auto">Popular tags</h2>
+    <div
+      class="mx-auto flex flex-wrap my-2 rounded-lg py-10 px-10 containerTags "
+    >
+    <div *ngIf="data.isLoading" class="grid grid-cols-1">
+      <div class="mx-auto my-2"></div>
+      <app-spinner></app-spinner>
+    </div>
+      <ng-container *ngFor="let popularTag of data.popularTags">
+        <div class="my-2 mx-auto">
+          <span class="tags tag rounded-lg bg-primary shadow-lg py-1 px-1"
+            ><a [routerLink]="['/tags', popularTag]">{{ popularTag }}</a></span
+          >
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,50 @@
+<div class="grid md:grid-cols-12 my-40">
+  <ng-container *ngIf="data$ | async as data">
+    <div *ngIf="data.userProfile" class="my-10 md:col-span-10 md:col-start-2">
+      <div class="flex items-center justify-center space-x-4">
+        <img
+          class="w-20 h-20 rounded-full"
+          [src]="data.userProfile.image"
+          alt="profile image"
+        />
+        <div class="font-medium">
+          <h2>{{ data.userProfile.username }}</h2>
+          <p>{{ data.userProfile.bio }}</p>
+          <a
+            *ngIf="data.isCurrentUserProfile"
+            routerLink="/auth/settings"
+            class="text-primary"
+            >Setting</a
+          >
+        </div>
+      </div>
+      <div>
+        <div>
+          <ul>
+            <li>
+              <a
+                [routerLink]="['/profiles', data.userProfile.username]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >My posts</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="[
+                  '/profiles',
+                  data.userProfile.username,
+                  'favorites'
+                ]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >My favorites</a
+              >
+            </li>
+          </ul>
+        </div>
+        <app-feed [apiUrl]="getApiUrl()"></app-feed>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,11 @@
+ul {
+  margin-top: 2%;
+}
+.active {
+  color: blueviolet;
+  border-bottom: 1px solid purple;
+}
+a {
+  font-weight: bold;
+  font-size: 1.2em;
+}

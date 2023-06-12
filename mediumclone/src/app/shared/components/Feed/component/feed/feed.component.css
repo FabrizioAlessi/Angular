@@ -1,0 +1,17 @@
+.articleCard {
+  background-color: #706c617e;
+  background-image: linear-gradient(to right, #706c617e, #191919);
+}
+.feedContainer {
+  background-color: #191919;
+}
+.title {
+  margin-bottom: 2%;
+}
+h2 {
+  text-transform: uppercase;
+}
+.author p{
+  font-weight: 900;
+  font-size: 1.5em;
+}

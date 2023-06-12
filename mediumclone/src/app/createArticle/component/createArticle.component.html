@@ -1,0 +1,22 @@
+<div class="my-40 grid md:grid-cols-3">
+  <div class="md:col-start-2">
+    <div class="container">
+      <div class="">
+      <h2 class="text-center">new article</h2>
+      </div>
+      <ng-container *ngIf="data$ | async as data">
+        <app-article-form
+          [isSubmitting]="data.isSubmitting"
+          [errors]="data.backendErrors"
+          [initialValues]="intialValue"
+          (articleSubmit)="onSubmit($event)"
+        ></app-article-form>
+      </ng-container>
+    </div>
+  </div>
+  <div class="flex justify-center mt-5 order-first md:order-last">
+    <div class="popularTagsContainer">
+    <app-popular-tags></app-popular-tags>
+  </div>
+  </div>
+</div>

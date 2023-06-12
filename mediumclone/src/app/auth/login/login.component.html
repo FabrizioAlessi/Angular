@@ -1,0 +1,55 @@
+<div class="banner mt-40 mb-20 mx-10 md:my-5 md:mx-auto">
+<app-banner></app-banner>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3">
+  <div class="md:col-start-2 formContainer rounded-lg p-8">
+    <form class="" [formGroup]="formReg" (submit)="authentication()">
+      <fieldset class="form-group">
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="email"
+            name="floating_email"
+            formControlName="email"
+            id="floating_email"
+            class="block py-2.5 px-0 w-full text-sm text-colorText bg-transparent border-0 border-b-2 appearance-none dark:text-colorText dark:border-colorText dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+            placeholder=""
+          />
+          <label
+            for="floating_email"
+            class="peer-focus:font-medium absolute text-sm text-colorText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Email address</label
+          >
+        </div>
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="password"
+            name="floating_password"
+            formControlName="password"
+            id="floating_password"
+            class="block py-2.5 px-0 w-full text-sm text-colorText bg-transparent border-0 border-b-2 appearance-none dark:text-colorText dark:border-colorText dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+            placeholder=""
+          />
+          <label
+            for="floating_password"
+            class="peer-focus:font-medium absolute text-sm text-colorText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Password</label
+          >
+        </div>
+        <div class="flex pt-2">
+          <div>
+            <button
+              type="submit"
+              class="text-colorText bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+              [disabled]="formReg.invalid"
+            >
+              Submit
+            </button>
+          </div>
+          <div class="linkReg grid justify-items-stretch px-2">
+            <p class="justify-self-end flex items-center hover:text-primary"><a class="hover:text-secondary" [routerLink]="['../register']">Hai bisogno di un account?</a></p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

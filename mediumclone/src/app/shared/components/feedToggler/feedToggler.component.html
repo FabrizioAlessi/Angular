@@ -1,0 +1,20 @@
+<div>
+  <ul class="flex flex-row">
+    <ng-container *ngIf="currentUser$ | async" >
+    <li class="mx-2">
+      <a [routerLink]="['/yourFeed']" routerLinkActive="active">Your feed</a>
+    </li>
+  </ng-container>
+    <li class="mx-2">
+      <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" queryParamsHandling="merge">Global feed</a>
+      <!-- routerLinkOption serve per definire attivo il link solo quando il match dell'URL è esattamente quello, altrimenti Angular conta come
+      link attivi anche quelli inclusi nell'url -->
+    </li>
+    <!-- TODO: implementare il toggle per TAG -->
+    <ng-container *ngIf="tagName" >
+    <li class="mx-2">
+      <a [routerLink]="['/tags', tagName]" routerLinkActive="active">{{tagName}}</a>
+    </li>
+  </ng-container>
+  </ul>
+</div>
