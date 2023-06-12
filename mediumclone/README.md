@@ -8,14 +8,14 @@ Client Medium Clone, con sistema di registrazione e auth degli utenti, user prof
 # Framework usati:
   Angular version 15.2.8
 # Libraries 
-  Rxjs
-  Ngrx (con pattern Redux per la gestione dello stato globale dell'applicazione, https://ngrx.io/)
-  Tailwind per il CSS e responsive
-  Query-string (https://www.npmjs.com/package/query-string)
+  Rxjs,
+  Ngrx (con pattern Redux per la gestione dello stato globale dell'applicazione, https://ngrx.io/),
+  Tailwind per il CSS e responsive,
+  Query-string (https://www.npmjs.com/package/query-string),
  
 # NOTA:  il progetto non è ancora completo
 # TODO: 
-  -completare il CSS
-  -completare il responsive per dipositivi xs (576px) e md (768px)
-  -aggiungere le seguenti features: follow degli utenti (al momento è solo possibile mettere like ai post degli utenti), sezione Commenti
+  -completare il CSS,
+  -completare il responsive per dipositivi xs (576px) e md (768px),
+  -aggiungere le seguenti features: follow degli utenti (al momento è solo possibile mettere like ai post degli utenti), sezione Commenti,
 
