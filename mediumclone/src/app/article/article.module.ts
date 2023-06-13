@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { articleReducer } from './store/reducers';
 import { TagListComponent } from '../shared/components/tagList/tagList.component';
 import { ArticleService } from '../shared/services/article.service';
+import { AddToFavoriteModule } from '../shared/components/addToFavorite/addToFavorite.module';
 
 const routes = [
   {
@@ -21,7 +22,8 @@ const routes = [
     RouterModule.forChild(routes),
     EffectsModule.forFeature([ArticleEffect, DeleteArticleEffect]),
     StoreModule.forFeature('article', articleReducer),
-    TagListComponent
+    TagListComponent,
+    AddToFavoriteModule
   ],
   declarations: [ArticleComponent],
   providers: [ArticleService]

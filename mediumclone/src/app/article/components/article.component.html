@@ -1,23 +1,86 @@
 <ng-container *ngIf="data$ | async as data">
-  <div *ngIf="data.article">
-    <h2>{{ data.article.title }}</h2>
-    <div>
-      <a [routerLink]="['/profiles', data.article.author.username]"
-        ><img
-          [routerLink]="['/profiles', data.article.author.username]"
-          alt=""
-          [src]="data.article.author.image"
-      /></a>
-      <a [routerLink]="['/profiles', data.article.author.username]">{{
-        data.article.author.username
-      }}</a>
-      <span>{{data.article.createdAt}}</span>
+  <div class="my-20 grid md:grid-cols-3" *ngIf="data.article">
+    <div class="md:col-start-2 mx-10 md:mx-0">
+      <div class="intestazione my-10">
+        <div>
+          <div class="flex">
+            <a [routerLink]="['/profiles', data.article.author.username]">
+              <img
+                class="w-7 h-7 rounded-full"
+                [src]="data.article.author.image"
+                alt="profile image"
+            /></a>
+            <a [routerLink]="['/profiles', data.article.author.username]">
+              <h3 class="text-primary ml-3">
+                {{ data.article.author.username }}
+              </h3>
+            </a>
+          </div>
+        </div>
+        <h2 class="mt-5">{{ data.article.title }}</h2>
+        <p>creato il: {{ data.article.createdAt }}</p>
+      </div>
+      <div class="flex flex-row border-b-2 border-colorText pb-10">
+        <div class="flex flex-row">
+          <ng-container *ngIf="data.isAuthor">
+            <span class="">
+              <button
+                class="mr-2 bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center"
+              >
+                <a
+                  class="flex edit text-colorText hover:text-colorText font-medium"
+                  [routerLink]="['/articles', data.article.slug, 'edit']"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    />
+                  </svg>
+                  modifica</a
+                >
+              </button>
+              <button
+                class="text-colorText bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center"
+                (click)="deleteArticle()"
+              >
+                <div class="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                    />
+                  </svg>
+                  <p>Elimina</p>
+                </div>
+              </button>
+            </span>
+
+            <div class="ml-4">
+              <app-add-to-favorite></app-add-to-favorite>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="my-5">
+        <app-tag-list [tags]="data.article.tagList"></app-tag-list>
+        <p>{{ data.article.body }}</p>
+      </div>
     </div>
-    <span *ngIf="data.isAuthor">
-      <a [routerLink]="['/articles', data.article.slug, 'edit']">edit article</a>
-      <button (click)="deleteArticle()">Delete article</button>
-    </span>
-    <app-tag-list [tags] = "data.article.tagList"></app-tag-list>
-    <p>{{ data.article.body }}</p>
   </div>
 </ng-container>

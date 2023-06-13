@@ -1,3 +1,4 @@
+import { ArticlesInterface } from './../../shared/types/articles.interface';
 import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { deleteArticle, getArticle } from "../store/articleActions";
@@ -6,6 +7,7 @@ import { Observable, combineLatest, filter, map } from "rxjs";
 import { isLoadingSelector } from "src/app/shared/components/Feed/store/selectors";
 import { dataArticleSelector } from "../store/articleSelector";
 import { currentUserSelector } from "src/app/store/selectors/authSelectors";
+import { ArticleResponseInterface } from "src/app/createArticle/types/createArticleResponse.interface";
 
 
 @Component({

@@ -1,7 +1,13 @@
-<ul class="flex flex-row">
-  <ng-container *ngFor="let tag of tags">
-  <li class="tag p-1 rounded-lg mx-1 my-1">
-    <a class="text-black" [routerLink]="['/tags', tag]">{{tag}}</a>
-  </li>
-</ng-container>
-</ul>
+<div class="flex">
+  <svg xmlns="http://www.w3.org/2000/svg" style="color:#9E37DA" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="self-center w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+  </svg>
+  <ul class="flex flex-row">
+    <ng-container *ngFor="let tag of tags">
+    <li class="tag p-1 rounded-lg mx-1 my-1">
+      <a class="" [routerLink]="['/tags', tag]">{{tag}}</a>
+    </li>
+  </ng-container>
+  </ul>
+</div>
+
